@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+
+.myTable {
+border: solid 1px #DDEEEE;
+border-collapse: collapse;
+border-spacing: 0;
+font: normal 13px Arial, sans-serif;
+}
+
+
+
+.myTable thead th {
+background-color: #ddefef00;
+border: solid 1px #DDEEEE;
+color: #336B6B;
+padding: 10px;
+text-align: center;
+text-shadow: 1px 1px 1px #fff;
+}
+.myTable tbody td {
+border: solid 1px #DDEEEE;
+color: #333;
+padding: 10px;
+text-shadow: 1px 1px 1px #fff;
+}
+.myTable-rounded {
+border: none;
+}
+.myTable-rounded thead th {
+background-color: rgb(116, 116, 116);
+border: none;
+text-shadow: 1px 1px 1px #ccc;
+color: #333;
+}
+.myTable-rounded thead th:first-child {
+border-radius: 10px 0 0 0;
+}
+
+.myTable-rounded thead th:last-child {
+border-radius: 0 10px 0 0;
+}
+
+.myTable-rounded tbody td {
+border: none;
+border-top: solid 1px #957030;
+}
+.myTable-rounded tbody tr:last-child td:first-child {
+border-radius: 0 0 0 10px;
+}
+.myTable-rounded tbody tr:last-child td:last-child {
+border-radius: 0 0 10px 0;
+}
+
+.myTable tbody tr:nth-child(even) {
+    background-color: rgb(255, 160, 8);
+}
+
+
+#last_koverked {
+    background-color: darkgrey;
+    width: 100%;
+    float: bottom;
+    align-content: right;
+    padding-left: 15px;
+    margin: 0px;
+    
+}
+
+#headline {
+    background-color: rgb(22, 0, 58);
+    float: none;
+    text-align: left;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    margin-top: -20px !important;
+    margin-bottom: 25px;
+    padding-top: 20px;
+    padding-bottom: 5px;
+    padding-left: 15px;
+    width: 100%;
+}
+
+body {
+    margin:  0;
+    padding: 0;
+}
+
+html {
+    margin: 0;
+    padding: 0;
+}
+
+head {
+    margin: 0;
+    padding: 0;
+}
+
+
+
+#slovar {
+    text-align: center;
+}
+
+#int {
+    width: 43%;
+    background-color: rgba(3, 17, 98, 0.575);
+    border-radius: 25px;
+
+
+}
+
+#bck {
+    content: "";
+    background-color: rgba(255, 105, 180, 0);
+    display: table;
+    width: 100%;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    margin-top: -25px !important;
+    clear: both;
+}
+
+.column {
+    float: left;
+    height: 1050px;
+    width: 50%;
+    padding: 25px;
+    margin: 5px;
+}
+
+#oper {
+    background-color: rgba(32, 17, 168, 0.513);
+    align-content: center;
+    width: 50%;
+    border-radius: 25px;
+
+}
+
+#footer {
+    margin: 15px;
+    float: bottom;
+}
+</style>
+</head>
+
+<body>
+<nav>
+    <div id='headline'>
+        <h2 style="color: ghostwhite;"> Автоматический Коверкатель Слов v 0.3 </h2>
+    </div>
+</nav>
+
+<div id='bck'> 
+    <div id='int' class="column">
+        <h4>{{intro}}</h4>
+    </div>
+
+<div id='oper' class="column">
+    <form action="{{ url_for("koverked")}}" method="post"> 
+    <label for="word">Введите слово: </label> 
+    <input type="text" id="word" name="word">  
+    <button type="submit">Исковеркать</button>
+
+    <div id='last_koverked'>
+        <h3>Последнее исковерканное: {{coverked_word}}</h3>
+    </div>
+
+
+    <div id='slovar'>
+        <h3>Словарь Исковерканных Слов</h3>
+        <center>
+        <table class="myTable myTable-rounded">
+        <thead>    
+        <tr>
+            <th>Нормальное</th>
+            <th>Коверканное</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for key, value in dict.items() %}
+        <tr>
+            <td>{{key}}</td>
+            <td>{{value}}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+        </table>
+        </center>
+        </div>
+    </form>
+</div>
+</div>
+
+
+<div id='footer'>
+    <h5>Stepan Prokhorenko 2021</h5>
+</div>
+</body>
+</html>
